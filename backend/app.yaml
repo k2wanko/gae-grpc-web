@@ -1,0 +1,17 @@
+runtime: go
+api_version: go1.8
+
+handlers:
+- url: /(.+(\.js|\.css))$
+  static_files: app/\1
+  upload: app/(.+(\.js|\.css))$
+  expiration: 10m
+  secure: always
+- url: /(.+(\.gif|\.png|\.jpg))$
+  static_files: app/\1
+  upload: app/(.+(\.gif|\.png|\.jpg))$
+  expiration: 30m
+  secure: always
+- url: /.*
+  script: _go_app
+  secure: always
