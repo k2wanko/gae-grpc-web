@@ -12,7 +12,7 @@ import { grpc, Code, Metadata } from "grpc-web-client";
 import { EchoService } from "../echo/echo_pb_service";
 import { EchoRequest } from "../echo/echo_pb";
 
-const host = location.href.slice(0, -1);
+const host = location.protocol + '//' + location.hostname + ':' + location.port;
 
 export default {
   name: "app",

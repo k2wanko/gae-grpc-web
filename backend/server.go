@@ -6,27 +6,34 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/k2wanko/gae-grpc-web/gaegrpc"
+
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/k2wanko/gae-grpc-web/echo"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
-	"google.golang.org/grpc"
 )
 
 var tpl *template.Template
 
+var gr *http.Request
+
 func init() {
 	tpl = template.Must(template.New("").ParseFiles("index.html"))
 
-	sv := grpc.NewServer()
+	sv := gaegrpc.NewServer()
 	echo.RegisterEchoServiceServer(sv, &EchoService{})
 
 	wsv := grpcweb.WrapServer(sv)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		gr = r
 		ctx := appengine.NewContext(r)
 		debugf(ctx, "content-type = %s", r.Header.Get("Content-Type"))
 		if strings.HasPrefix(r.Header.Get("Content-Type"), "application/grpc-web") {
-			wsv.ServeHTTP(w, r)
+			ctx := appengine.NewContext(r)
+			debugf(ctx, "header = %#v", r.Header)
+			wsv.ServeHTTP(w, gaegrpc.NewRequest(r))
+			gaegrpc.DeleteRequest(r)
 		} else {
 			serverTop(w, r)
 		}
