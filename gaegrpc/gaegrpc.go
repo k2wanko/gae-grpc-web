@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"sync"
 
-	netcontext "golang.org/x/net/context"
+	"golang.org/x/net/context"
 	"google.golang.org/appengine"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -21,19 +21,19 @@ var (
 	mu   sync.RWMutex
 )
 
-func newContextWithRequest(ctx netcontext.Context, r *http.Request) netcontext.Context {
-	return netcontext.WithValue(ctx, requestKey{}, r)
+func newContextWithRequest(ctx context.Context, r *http.Request) context.Context {
+	return context.WithValue(ctx, requestKey{}, r)
 }
 
 // RequestFromContext returns *http.Request
-func RequestFromContext(ctx netcontext.Context) *http.Request {
+func RequestFromContext(ctx context.Context) *http.Request {
 	if r, ok := ctx.Value(requestKey{}).(*http.Request); ok {
 		return r
 	}
 	return nil
 }
 
-func requestIDFromContext(ctx netcontext.Context) string {
+func requestIDFromContext(ctx context.Context) string {
 	if md, ok := metadata.FromIncomingContext(ctx); ok {
 		v := md[HeaderKey]
 		if len(v) > 0 {
@@ -44,7 +44,7 @@ func requestIDFromContext(ctx netcontext.Context) string {
 	return ""
 }
 
-func newAppContext(ctx netcontext.Context) netcontext.Context {
+func newAppContext(ctx context.Context) context.Context {
 	id := requestIDFromContext(ctx)
 	if id != "" {
 		mu.RLock()
@@ -58,7 +58,7 @@ func newAppContext(ctx netcontext.Context) netcontext.Context {
 
 func injectAppContext() []grpc.ServerOption {
 	return []grpc.ServerOption{
-		grpc.UnaryInterceptor(func(ctx netcontext.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+		grpc.UnaryInterceptor(func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 			resp, err = handler(newAppContext(ctx), req)
 			return
 		}),
@@ -72,11 +72,11 @@ func injectAppContext() []grpc.ServerOption {
 }
 
 type wrapServerStream struct {
-	ctx netcontext.Context
+	ctx context.Context
 	grpc.ServerStream
 }
 
-func (wss *wrapServerStream) Context() netcontext.Context {
+func (wss *wrapServerStream) Context() context.Context {
 	return wss.ctx
 }
 

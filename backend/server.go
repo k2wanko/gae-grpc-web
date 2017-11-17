@@ -16,8 +16,6 @@ import (
 
 var tpl *template.Template
 
-var gr *http.Request
-
 func init() {
 	tpl = template.Must(template.New("").ParseFiles("index.html"))
 
@@ -26,12 +24,9 @@ func init() {
 
 	wsv := grpcweb.WrapServer(sv)
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		gr = r
 		ctx := appengine.NewContext(r)
 		debugf(ctx, "content-type = %s", r.Header.Get("Content-Type"))
 		if strings.HasPrefix(r.Header.Get("Content-Type"), "application/grpc-web") {
-			ctx := appengine.NewContext(r)
-			debugf(ctx, "header = %#v", r.Header)
 			wsv.ServeHTTP(w, gaegrpc.NewRequest(r))
 			gaegrpc.DeleteRequest(r)
 		} else {
