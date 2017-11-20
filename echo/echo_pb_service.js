@@ -14,6 +14,14 @@ EchoService.Echo = {
   requestType: echo_pb.EchoRequest,
   responseType: echo_pb.EchoResponse
 };
+EchoService.EchoHistory = {
+  methodName: "EchoHistory",
+  service: EchoService,
+  requestStream: false,
+  responseStream: true,
+  requestType: echo_pb.EchoHistoryRequest,
+  responseType: echo_pb.EchoResponse
+};
 module.exports = {
   EchoService: EchoService,
 };

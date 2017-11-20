@@ -64,7 +64,8 @@ func injectAppContext() []grpc.ServerOption {
 		}),
 		grpc.StreamInterceptor(func(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) (err error) {
 			err = handler(srv, &wrapServerStream{
-				ctx: newAppContext(ss.Context()),
+				ctx:          newAppContext(ss.Context()),
+				ServerStream: ss,
 			})
 			return
 		}),

@@ -5,17 +5,23 @@ import (
 	"html/template"
 	"net/http"
 	"strings"
-
-	"github.com/k2wanko/gae-grpc-web/gaegrpc"
+	"time"
 
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/k2wanko/gae-grpc-web/echo"
+	"github.com/k2wanko/gae-grpc-web/gaegrpc"
 	"google.golang.org/appengine/log"
 )
 
 var tpl *template.Template
 
 func init() {
+	l, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		panic(l)
+	}
+	time.Local = l
+
 	tpl = template.Must(template.New("").ParseFiles("index.html"))
 
 	sv := gaegrpc.NewServer()

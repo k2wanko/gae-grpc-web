@@ -7,10 +7,21 @@ message EchoRequest {
   string message = 1;
 }
 
+message Echo {
+  string id = 1;
+  string message = 2;
+  int64 created = 3;
+}
+
 message EchoResponse {
-  string message = 1;
+  Echo echo = 1;
+}
+
+message EchoHistoryRequest {
+  int32 limit = 1;
 }
 
 service EchoService {
   rpc Echo(EchoRequest) returns (EchoResponse);
+  rpc EchoHistory(EchoHistoryRequest) returns (stream EchoResponse);
 }

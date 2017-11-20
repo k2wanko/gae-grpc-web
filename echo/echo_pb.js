@@ -9,6 +9,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
+goog.exportSymbol('proto.net.k2lab.test.grpc.testing.echo.Echo', null, global);
+goog.exportSymbol('proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest', null, global);
 goog.exportSymbol('proto.net.k2lab.test.grpc.testing.echo.EchoRequest', null, global);
 goog.exportSymbol('proto.net.k2lab.test.grpc.testing.echo.EchoResponse', null, global);
 
@@ -172,6 +174,210 @@ proto.net.k2lab.test.grpc.testing.echo.EchoRequest.prototype.setMessage = functi
  * @extends {jspb.Message}
  * @constructor
  */
+proto.net.k2lab.test.grpc.testing.echo.Echo = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.net.k2lab.test.grpc.testing.echo.Echo, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.net.k2lab.test.grpc.testing.echo.Echo.displayName = 'proto.net.k2lab.test.grpc.testing.echo.Echo';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.toObject = function(opt_includeInstance) {
+  return proto.net.k2lab.test.grpc.testing.echo.Echo.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.net.k2lab.test.grpc.testing.echo.Echo} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    created: jspb.Message.getFieldWithDefault(msg, 3, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.net.k2lab.test.grpc.testing.echo.Echo}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.net.k2lab.test.grpc.testing.echo.Echo;
+  return proto.net.k2lab.test.grpc.testing.echo.Echo.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.net.k2lab.test.grpc.testing.echo.Echo} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.net.k2lab.test.grpc.testing.echo.Echo}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMessage(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setCreated(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.net.k2lab.test.grpc.testing.echo.Echo} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = this.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = this.getCreated();
+  if (f !== 0) {
+    writer.writeInt64(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string id = 1;
+ * @return {string}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/** @param {string} value */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.setId = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional string message = 2;
+ * @return {string}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.setMessage = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional int64 created = 3;
+ * @return {number}
+ */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.getCreated = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.net.k2lab.test.grpc.testing.echo.Echo.prototype.setCreated = function(value) {
+  jspb.Message.setField(this, 3, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.net.k2lab.test.grpc.testing.echo.EchoResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -207,7 +413,7 @@ proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.toObject = functio
  */
 proto.net.k2lab.test.grpc.testing.echo.EchoResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    message: jspb.Message.getFieldWithDefault(msg, 1, "")
+    echo: (f = msg.getEcho()) && proto.net.k2lab.test.grpc.testing.echo.Echo.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -245,8 +451,9 @@ proto.net.k2lab.test.grpc.testing.echo.EchoResponse.deserializeBinaryFromReader 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMessage(value);
+      var value = new proto.net.k2lab.test.grpc.testing.echo.Echo;
+      reader.readMessage(value,proto.net.k2lab.test.grpc.testing.echo.Echo.deserializeBinaryFromReader);
+      msg.setEcho(value);
       break;
     default:
       reader.skipField();
@@ -286,9 +493,175 @@ proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.serializeBinary = 
  */
 proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
-  f = this.getMessage();
-  if (f.length > 0) {
-    writer.writeString(
+  f = this.getEcho();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.net.k2lab.test.grpc.testing.echo.Echo.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Echo echo = 1;
+ * @return {?proto.net.k2lab.test.grpc.testing.echo.Echo}
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.getEcho = function() {
+  return /** @type{?proto.net.k2lab.test.grpc.testing.echo.Echo} */ (
+    jspb.Message.getWrapperField(this, proto.net.k2lab.test.grpc.testing.echo.Echo, 1));
+};
+
+
+/** @param {?proto.net.k2lab.test.grpc.testing.echo.Echo|undefined} value */
+proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.setEcho = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.clearEcho = function() {
+  this.setEcho(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.hasEcho = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.displayName = 'proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    limit: jspb.Message.getFieldWithDefault(msg, 1, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest}
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest;
+  return proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest}
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setLimit(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
+  f = this.getLimit();
+  if (f !== 0) {
+    writer.writeInt32(
       1,
       f
     );
@@ -297,16 +670,16 @@ proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.serializeBinaryToW
 
 
 /**
- * optional string message = 1;
- * @return {string}
+ * optional int32 limit = 1;
+ * @return {number}
  */
-proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.getMessage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
-/** @param {string} value */
-proto.net.k2lab.test.grpc.testing.echo.EchoResponse.prototype.setMessage = function(value) {
+/** @param {number} value */
+proto.net.k2lab.test.grpc.testing.echo.EchoHistoryRequest.prototype.setLimit = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
