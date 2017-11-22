@@ -14,7 +14,9 @@
     "build": "run-s clean build-all",
     "build-all": "run-p build:*",
     "build:web": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "build:proto": "./build/proto_gen.sh"
+    "build:proto": "./build/proto_gen.sh",
+    "deploy": "run-s build deploy:*",
+    "deploy:appengine": "gcloud -q --project gae-grpc-web app deploy backend/app.yaml"
   },
   "dependencies": {
     "google-protobuf": "^3.4.0",

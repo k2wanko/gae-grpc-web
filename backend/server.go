@@ -1,11 +1,12 @@
 package backend
 
 import (
-	"context"
 	"html/template"
 	"net/http"
 	"strings"
 	"time"
+
+	"golang.org/x/net/context"
 
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/k2wanko/gae-grpc-web/echo"
@@ -27,15 +28,14 @@ func init() {
 	sv := gaegrpc.NewServer()
 	echo.RegisterEchoServiceServer(sv, &EchoService{})
 
-	wgs := grpcweb.WrapServer(sv)
-	http.HandleFunc("/", createAppHandler(wgs))
+	wh := gaegrpc.NewWrapHandler(grpcweb.WrapServer(sv))
+	http.HandleFunc("/", createAppHandler(wh))
 }
 
-func createAppHandler(wgs *grpcweb.WrappedGrpcServer) http.HandlerFunc {
+func createAppHandler(h http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if strings.HasPrefix(r.Header.Get("Content-Type"), "application/grpc-web") {
-			wgs.ServeHTTP(w, gaegrpc.NewRequest(r))
-			gaegrpc.DeleteRequest(r)
+			h.ServeHTTP(w, r)
 		} else {
 			serverTop(w, r)
 		}
