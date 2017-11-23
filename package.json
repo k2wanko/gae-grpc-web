@@ -19,8 +19,8 @@
     "deploy:appengine": "gcloud -q --project gae-grpc-web app deploy backend/app.yaml"
   },
   "dependencies": {
-    "google-protobuf": "^3.4.0",
     "grpc-web-client": "^0.3.1",
+    "google-protobuf": "^3.5.0",
     "vue": "^2.4.4"
   },
   "browserslist": [
