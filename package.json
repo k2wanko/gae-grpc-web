@@ -16,7 +16,7 @@
     "build:web": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build:proto": "./build/proto_gen.sh",
     "deploy": "run-s build deploy:*",
-    "deploy:appengine": "gcloud -q --project gae-grpc-web app deploy backend/app.yaml"
+    "deploy:appengine": "gcloud -q --project gae-grpc-web app deploy --version 1 backend/app.yaml"
   },
   "dependencies": {
     "grpc-web-client": "^0.3.1",
