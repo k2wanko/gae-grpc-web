@@ -48,7 +48,10 @@ export default {
             const resp = message.toObject();
             console.log("EchoService.Echo.onEnd.message", resp);
             this.echoResponse = resp.echo.message;
-            this.history.unshift(resp.echo)
+            if (this.history.length >= 10) {
+              this.history.pop();
+            }
+            this.history.unshift(resp.echo);
           }
           console.log("EchoService.Echo.onEnd.trailers", trailers);
 
